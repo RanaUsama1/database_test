@@ -1,4 +1,4 @@
-import { createApp, reactive } from "vue";
+import { createApp } from "vue";
 // import { BModal, BButton } from 'bootstrap-vue-3'
 import JsonCSV from "vue-json-csv";
 import App from "./App.vue";
