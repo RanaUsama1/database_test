@@ -24,10 +24,33 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode, ssrBuild }) => {
+// export default defineConfig(({ command, mode, ssrBuild }) => {
+//   const isProduction = mode === "production";
+//   const ret = {
+//     base: isProduction ? "/database_test/" : "/",
+//     plugins: [vue()],
+//     resolve: {
+//       alias: {
+//         "@": fileURLToPath(new URL("./src", import.meta.url)),
+//       },
+//     },
+//   };
+
+//   ret.define = {
+//     __API_URL__: JSON.stringify(
+//       isProduction
+//         ? "https://ranausama1.github.io/database_test/"
+//         : "http://localhost:3000"
+//     ),
+//   };
+
+//   return ret;
+// });
+
+export default defineConfig(({ command, mode }) => {
   const isProduction = mode === "production";
-  const ret = {
-    base: isProduction ? "/database_test/" : "/",
+  return {
+    base: isProduction ? "/database_test/" : "/", // Use the correct base for GitHub Pages
     plugins: [vue()],
     resolve: {
       alias: {
@@ -35,14 +58,4 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       },
     },
   };
-
-  ret.define = {
-    __API_URL__: JSON.stringify(
-      isProduction
-        ? "https://ranausama1.github.io/database_test/"
-        : "http://localhost:3000"
-    ),
-  };
-
-  return ret;
 });
