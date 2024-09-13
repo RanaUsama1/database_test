@@ -61,6 +61,7 @@ import vue from "@vitejs/plugin-vue";
 // });
 
 export default defineConfig({
-  base: process.env.NODE_ENV === "production" ? "/database_test/" : "/",
+  // base: process.env.NODE_ENV === "production" ? "/database_test/" : "/",
+  base: "/database_test/",
   plugins: [vue()],
 });
