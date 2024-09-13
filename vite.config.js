@@ -47,15 +47,20 @@ import vue from "@vitejs/plugin-vue";
 //   return ret;
 // });
 
-export default defineConfig(({ command, mode }) => {
-  const isProduction = mode === "production";
-  return {
-    base: isProduction ? "/database_test/" : "/", // Use the correct base for GitHub Pages
-    plugins: [vue()],
-    resolve: {
-      alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
-      },
-    },
-  };
+// export default defineConfig(({ command, mode }) => {
+//   const isProduction = mode === "production";
+//   return {
+//     base: isProduction ? "/database_test/" : "/", // Use the correct base for GitHub Pages
+//     plugins: [vue()],
+//     resolve: {
+//       alias: {
+//         "@": fileURLToPath(new URL("./src", import.meta.url)),
+//       },
+//     },
+//   };
+// });
+
+export default defineConfig({
+  base: process.env.NODE_ENV === "production" ? "/database_test/" : "/",
+  plugins: [vue()],
 });

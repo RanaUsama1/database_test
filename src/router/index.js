@@ -9,7 +9,7 @@ import SRAView from "../views/SRAView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL || "/database_test/"),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/", component: HomeView },
     { path: "/help", component: HelpView },
