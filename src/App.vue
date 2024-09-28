@@ -48,7 +48,7 @@ export default {
   <header>
     <hgroup style="display: flex; margin-top: 5%">
       <img
-        src="/public/images/MicroAlgae_logo.png"
+        src="/src/images/MicroAlgae_logo.png"
         alt="Micro Algae Logo"
         title="Micro Algae Logo"
         style="width: 10%; height: auto; margin-top: -30px"
@@ -93,19 +93,19 @@ export default {
       <div class="banners">
         <div class="image">
           <img
-            src="/public/images/unitus.png"
+            src="/src/images/unitus.png"
             style="width: 70%; height: 70%; margin-top: 20px"
           />
         </div>
         <div class="image">
           <img
-            src="/public/images/Stemma_sapienza.png"
+            src="/src/images/Stemma_sapienza.png"
             style="width: 100%; height: 100%"
           />
         </div>
         <div class="image">
           <img
-            src="/public/images/cnr.png"
+            src="/src/images/cnr.png"
             style="width: 80%; height: 100%; margin-top: 15px"
           />
         </div>
