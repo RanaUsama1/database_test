@@ -87,48 +87,55 @@ export default {
 
       <!-- Use a table for the BioSamples data -->
       <table>
-        <tr>
-          <th>BioSample</th>
-          <th>Experiments</th>
-          <th>Runs</th>
-        </tr>
-        <tr v-for="sample in proj.BioSamples" :key="sample.BioSampleId">
-          <td>
-            <div class="origin">
-              BioSample: ({{ sample.Experiments.length }})
-            </div>
-            <a
-              :href="
-                'https://www.ncbi.nlm.nih.gov/biosample/' + sample.BioSampleId
-              "
-              target="_blank"
-            >
-              {{ sample.BioSampleId }}
-            </a>
-          </td>
-          <td v-for="exp in sample.Experiments" :key="exp.ExperimentId">
-            <div class="origin">Experiment: ({{ exp.Runs.length }})</div>
-            <a
-              :href="'https://www.ncbi.nlm.nih.gov/sra/' + exp.ExperimentId"
-              target="_blank"
-            >
-              {{ exp.ExperimentId }}
-            </a>
-          </td>
-          <td>
-            <ul v-for="run in exp.Runs" :key="run">
-              <li>
-                <div class="origin">Run:</div>
-                <a
-                  :href="'https://trace.ncbi.nlm.nih.gov/Traces?run=' + run"
-                  target="_blank"
-                >
-                  {{ run }}
-                </a>
-              </li>
-            </ul>
-          </td>
-        </tr>
+        <!-- Table header inside thead -->
+        <thead>
+          <tr>
+            <th>BioSample</th>
+            <th>Experiments</th>
+            <th>Runs</th>
+          </tr>
+        </thead>
+
+        <!-- Table body inside tbody -->
+        <tbody>
+          <tr v-for="sample in proj.BioSamples" :key="sample.BioSampleId">
+            <td>
+              <div class="origin">
+                BioSample: ({{ sample.Experiments.length }})
+              </div>
+              <a
+                :href="
+                  'https://www.ncbi.nlm.nih.gov/biosample/' + sample.BioSampleId
+                "
+                target="_blank"
+              >
+                {{ sample.BioSampleId }}
+              </a>
+            </td>
+            <td v-for="exp in sample.Experiments" :key="exp.ExperimentId">
+              <div class="origin">Experiment: ({{ exp.Runs.length }})</div>
+              <a
+                :href="'https://www.ncbi.nlm.nih.gov/sra/' + exp.ExperimentId"
+                target="_blank"
+              >
+                {{ exp.ExperimentId }}
+              </a>
+            </td>
+            <td>
+              <ul v-for="run in exp.Runs" :key="run">
+                <li>
+                  <div class="origin">Run:</div>
+                  <a
+                    :href="'https://trace.ncbi.nlm.nih.gov/Traces?run=' + run"
+                    target="_blank"
+                  >
+                    {{ run }}
+                  </a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <!-- Optional images for each project -->

@@ -2,14 +2,14 @@
   "name": "teapot",
   "version": "0.0.0",
   "scripts": {
-  "dev": "vite",                        
-  "build": "vite build",               
-  "serve": "vite preview --port 4173",  
-  "build-dev": "vite build --mode development",  
-  "build-prod": "vite build --mode production",  
-  "build-embed": "vite build --mode production --base=/dashboard/",  
-  "preview": "vite preview --port 4173" 
-},
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview --port 4173",
+    "build-dev": "vite build --mode development",
+    "build-prod": "vite build --mode production",
+    "build-embed": "vite build --mode production --base=/dashboard/",
+    "preview": "vite preview --port 4173"
+  },
   "dependencies": {
     "@innologica/vue-dropdown-menu": "^0.1.4",
     "axios": "^1.7.7",
@@ -26,9 +26,9 @@
     "marked": "^5.0.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.6.0",
-    "vue": "^3.5.9",
+    "vue": "^3.5.10",
     "vue-dropdowns": "^1.1.2",
-    "vue-json-csv": "^1.2.10",
+    "vue-json-csv": "^2.1.0",
     "vue-router": "^4.0.13",
     "vue3-click-away": "^1.2.4"
   },
@@ -42,7 +42,7 @@
     "file-loader": "^6.2.0",
     "globals": "^15.9.0",
     "mini-css-extract-plugin": "^2.9.1",
-    "vite": "^5.0.0",
+    "vite": "^5.4.8",
     "vue-loader": "^16.8.3",
     "webpack": "^5.94.0"
   }

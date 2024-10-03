@@ -20,12 +20,12 @@ const router = createRouter({
     { path: "/organism/:taxid/nucleotides", component: OrganismView },
     { path: "/organism/:taxid/proteins", component: OrganismView },
     { path: "/sra", component: SRAView },
-    {
-      path: "/team",
-      beforeEnter(to, from, next) {
-        window.location.replace("https://www.youtube.com/watch?v=uDLVHywMGfE");
-      },
-    },
+    // {
+    //   path: "/team",
+    //   beforeEnter(to, from, next) {
+    //     window.location.replace("https://www.youtube.com/watch?v=uDLVHywMGfE");
+    //   },
+    // },
     { path: "/:pathMatch(.*)", component: NotFoundView },
   ],
 });
