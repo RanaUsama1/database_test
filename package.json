@@ -1,5 +1,6 @@
 {
   "name": "teapot",
+  "homepage": "https://ranausama1.github.io/database_test/",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
