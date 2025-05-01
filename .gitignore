@@ -15,6 +15,14 @@ node_modules/
 coverage
 *.local
 
+@"
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+"@ | Out-File -FilePath .gitignore
 /cypress/videos/
 /cypress/screenshots/
 
