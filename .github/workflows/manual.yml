@@ -1,0 +1,25 @@
+# This is a basic workflow that is manually triggered
+
+name: Vulgaris Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+ build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up VueJs
+      uses: actions/setup-node@master
+    
+    - name: Install package.json
+      run: npm install
+
+    - name: Build
+      run: npm run build-prod

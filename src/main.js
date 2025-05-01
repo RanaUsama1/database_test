@@ -1,0 +1,37 @@
+import { createApp } from "vue";
+// import { BModal, BButton } from 'bootstrap-vue-3'
+import JsonCSV from "vue-json-csv";
+import App from "./App.vue";
+import router from "./router";
+import axios from "./services/axios.js";
+import API from "./services/axios.js"
+import ErrorMsg from "./components/ErrorMsg.vue";
+import LoadingSpinner from "./components/LoadingSpinner.vue";
+import NucleoComp from "./components/NucleotideComp.vue";
+import BioProjComp from "./components/BioProjComp.vue";
+import TableComp from "./components/TableComp.vue";
+import { BootstrapVue3 } from "bootstrap-vue-3";
+import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
+// import "@/assets/bootstrap/css/bootstrap.css";
+// import "@/assets/bootstrap/js/bootstrap.bundle.js";
+// import AppDropdown from './components/AppDropdown.vue'
+// import AppDropdownContent from './components/AppDropdownContent.vue'
+// import AppDropdownItem from './components/AppDropdownItem.vue'
+import "./assets/dashboard.css";
+import "./assets/main.css";
+import "./assets/login.css";
+import "./assets/modal.css";
+import "./assets/dropdown.css";
+import "./assets/monitor.css";
+const app = createApp(App);
+app.config.globalProperties.$axios = axios;
+app.component("download-csv", JsonCSV);
+app.component("ErrorMsg", ErrorMsg);
+app.component("NucleoComp", NucleoComp);
+app.component("LoadingSpinner", LoadingSpinner);
+app.component("BioProjComp", BioProjComp);
+app.component("TableComp", TableComp);
+app.use(router);
+app.provide('API', API)
+app.mount("#app");
+app.use(BootstrapVue3);
