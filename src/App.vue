@@ -45,10 +45,10 @@ export default {
             <RouterLink to="/"> Home </RouterLink>
           </li>
           <li>
-            <RouterLink to="/genome"> Taxonomy </RouterLink>
+            <RouterLink to="/genome"> Genome </RouterLink>
           </li>
           <li>
-            <RouterLink to="/taxonomy"> Nucleotide </RouterLink>
+            <RouterLink to="/nucleotide"> Nucleotide </RouterLink>
           </li>
           <!-- <li>
           <RouterLink to="/sra"> SRA </RouterLink>

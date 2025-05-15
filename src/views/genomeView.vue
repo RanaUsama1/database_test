@@ -98,6 +98,168 @@
 import API from "../services/axios"
 import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
+
+export default {
+  components: {
+    VueJsonPretty
+  },
+  data() {
+    return {
+      databases: ["nucleotide", "assembly"],
+      selectedDatabase: "assembly",
+      accessionIds: "",
+      query: "",
+      metadata: [],
+      loading: false,
+      errormsg: "",
+      hasSearched: false,
+      expandedIndices: []
+    };
+  },
+  methods: {
+    // async searchDatabase() {
+    //   this.loading = true;
+    //   this.errormsg = "";
+    //   this.metadata = [];
+    //   this.hasSearched = true;
+
+    //   try {
+    //     // Build params object
+    //     const params = {
+    //       database: this.selectedDatabase
+    //     };
+
+    //     if (this.selectedDatabase === "assembly") {
+    //       const accessions = this.accessionIds.trim().split(/[\s,]+/).filter(id => id);
+    //       if (!accessions.length) {
+    //         throw new Error("Please enter at least one accession number");
+    //       }
+    //       params.accession_ids = accessions.join(','); // ✅ Axios will auto-convert array
+    //     } else {
+    //       if (!this.query.trim()) {
+    //         throw new Error("Please enter search terms");
+    //       }
+    //       params.query = this.query.trim();
+    //     }
+
+    //     // 🚀 Proper API call using the service
+    //     const response = await API.search(params);
+        
+    //     // Handle response data
+    //     if (response.data.results) {
+    //       this.metadata = response.data.results;
+    //     } else if (response.data.metadata) {
+    //       this.metadata = response.data.metadata;
+    //     } else if (response.data.assemblies) {
+    //       this.metadata = response.data.assemblies;
+    //     } else {
+    //       throw new Error("Unexpected response format");
+    //     }
+
+    //     console.log("Fetched metadata:", JSON.stringify(this.metadata, null, 2));
+
+    //     // Handle failed accessions
+    //     if (response.data.failed_accessions?.length > 0) {
+    //       this.errormsg = `Failed to fetch: ${response.data.failed_accessions.join(', ')}`;
+    //       if (response.data.failed_accessions.some(id => id.includes('.'))) {
+    //         this.errormsg += `. Try using base accession`;
+    //       }
+    //     }
+
+    //   } catch (error) {
+    //     console.error("Search error:", error);
+    //     this.errormsg = error.response?.data?.detail || 
+    //                    error.message || 
+    //                    "An unknown error occurred";
+    //   } finally {
+    //     this.loading = false;
+    //   }
+    // },
+    async searchDatabase() {
+  this.loading = true;
+  this.errormsg = "";
+  this.metadata = [];
+  this.hasSearched = true;
+
+  try {
+    const params = {
+      database: this.selectedDatabase
+    };
+
+    if (this.selectedDatabase === "assembly") {
+      const accessions = this.accessionIds.trim().split(/[\s,]+/).filter(id => id);
+      if (!accessions.length) {
+        throw new Error("Please enter at least one accession number");
+      }
+      params.accession_ids = accessions.join(',');
+    } else {
+      if (!this.query.trim()) {
+        throw new Error("Please enter search terms");
+      }
+      params.query = this.query.trim();
+    }
+
+    // 🚀 API.search() returns parsed data directly (no .data property)
+    const data = await API.search(params);
+    
+    // Handle response data directly
+    if (data.results) {
+      this.metadata = data.results;
+    } else if (data.metadata) {
+      this.metadata = data.metadata;
+    } else if (data.assemblies) {
+      this.metadata = data.assemblies;
+    } else {
+      throw new Error("Unexpected response format");
+    }
+
+    console.log("Fetched metadata:", JSON.stringify(this.metadata, null, 2));
+
+    // Handle failed accessions
+    if (data.failed_accessions?.length > 0) {
+      this.errormsg = `Failed to fetch: ${data.failed_accessions.join(', ')}`;
+      if (data.failed_accessions.some(id => id.includes('.'))) {
+        this.errormsg += `. Try using base accession`;
+      }
+    }
+
+  } catch (error) {
+    console.error("Search error:", error);
+    this.errormsg = error.response?.detail || 
+                   error.message || 
+                   "An unknown error occurred";
+  } finally {
+    this.loading = false;
+  }
+},
+    toggleDetails(index) {
+      const i = this.expandedIndices.indexOf(index);
+      if (i > -1) {
+        this.expandedIndices.splice(i, 1);
+      } else {
+        this.expandedIndices.push(index);
+      }
+    }
+  },
+  computed: {
+    validMetadata() {
+      return this.metadata.filter(item =>
+        item &&
+        (
+          item.accession ||
+          item.assembly?.assembly_accession ||
+          item.assembly_name ||
+          item.assembly?.display_name
+        )
+      );
+    }
+  }
+};
+</script>
+<!-- <script>
+import API from "../services/axios"
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
 export default {
   components: {
     VueJsonPretty
@@ -161,7 +323,7 @@ export default {
         console.log("Fetched metadata:", JSON.stringify(this.metadata, null, 2));
 
 
-        // Check for failed accessions
+        // Check for failed accessions 
         if (data.failed_accessions?.length > 0) {
           this.errormsg = `Failed to fetch: ${data.failed_accessions.join(', ')}`;
           
@@ -211,7 +373,7 @@ export default {
 
   }
 };
-</script>
+</script> -->
 
 
 <style>

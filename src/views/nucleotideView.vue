@@ -156,6 +156,7 @@
 </template>
 
 <script>
+import API from "../services/axios"
 export default {
   data() {
     return {
@@ -184,41 +185,87 @@ export default {
     };
   },
   methods: {
+    // async searchDatabase() {
+    //   this.loading = true;
+    //   this.errormsg = "";
+    //   this.metadata = [];
+
+    //   const params = new URLSearchParams();
+    //   params.append("database", this.selectedDatabase);
+    //   if (this.organism) params.append("organism", this.organism);
+    //   if (this.gene) params.append("gene", this.gene);
+    //   if (this.protein) params.append("protein", this.protein);
+    //   if (this.moleculeType) params.append("molecule_type", this.moleculeType);
+    //   if (this.pubDate) params.append("publication_date", this.pubDate); // Add database parameter
+    //   if (this.query) params.append("query", this.query);
+    //   if (this.accessionIds) params.append("accession_ids", this.accessionIds);
+    //   if (this.taxid) params.append("taxid", this.taxid);
+    //   if (this.minLength) params.append("min_length", this.minLength);
+    //   if (this.maxLength) params.append("max_length", this.maxLength);
+
+    //   const apiUrl = `http://127.0.0.1:8000/search/?${params.toString()}`;
+
+    //   try {
+    //     const response = await fetch(apiUrl);
+    //     if (!response.ok) {
+    //       throw new Error(`Error: ${response.statusText}`);
+    //     }
+
+    //     const data = await response.json();
+    //     this.metadata = data.metadata || [];
+    //   }
+    // 
     async searchDatabase() {
       this.loading = true;
-      this.errormsg = "";
-      this.metadata = [];
+  this.errormsg = "";
+  this.metadata = [];
 
-      const params = new URLSearchParams();
-      params.append("database", this.selectedDatabase);
-      if (this.organism) params.append("organism", this.organism);
-      if (this.gene) params.append("gene", this.gene);
-      if (this.protein) params.append("protein", this.protein);
-      if (this.moleculeType) params.append("molecule_type", this.moleculeType);
-      if (this.pubDate) params.append("publication_date", this.pubDate); // Add database parameter
-      if (this.query) params.append("query", this.query);
-      if (this.accessionIds) params.append("accession_ids", this.accessionIds);
-      if (this.taxid) params.append("taxid", this.taxid);
-      if (this.minLength) params.append("min_length", this.minLength);
-      if (this.maxLength) params.append("max_length", this.maxLength);
+  try {
+    // Build params object - ONLY include defined values
+    const params = {
+      database: this.selectedDatabase
+    };
 
-      const apiUrl = `http://127.0.0.1:8000/search/?${params.toString()}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        this.metadata = data.metadata || [];
-      } catch (error) {
-        console.error("Error:", error);
-        this.errormsg = error.message;
-      } finally {
-        this.loading = false;
+    // Conditionally add parameters that have values
+    if (this.selectedDatabase === 'assembly') {
+      if (this.accessionIds) {
+        // For assembly searches, only send accession_ids
+        params.accession_ids = this.accessionIds.trim().split(/[\s,]+/).filter(id => id);
       }
-    },
+    } else {
+      // For nucleotide searches
+      if (this.query) params.query = this.query;
+      if (this.organism) params.organism = this.organism;
+      if (this.gene) params.gene = this.gene;
+      if (this.protein) params.protein = this.protein;
+      if (this.taxid) params.taxid = Number(this.taxid); // Ensure numeric
+      if (this.minLength) params.min_length = Number(this.minLength);
+      if (this.maxLength) params.max_length = Number(this.maxLength);
+      if (this.moleculeType) params.molecule_type = this.moleculeType;
+      if (this.pubDate) params.publication_date = this.pubDate;
+    }
+
+    // 🚀 Use the API service
+    const response = await API.search(params);
+    
+    // Handle response - check all possible response formats
+    this.metadata = response.metadata || response.results || response.assemblies || [];
+    
+    // Handle failed accessions if present
+    if (response.failed_accessions?.length > 0) {
+      this.errormsg = `Partial success. Failed: ${response.failed_accessions.join(', ')}`;
+    }
+
+  } catch (error) {
+    console.error("Search error:", error);
+    // Improved error message display
+    this.errormsg = error.message.includes('{') 
+      ? "Invalid parameters sent to server" 
+      : error.message;
+  } finally {
+    this.loading = false;
+  }
+},
     toggleCollapsible(event) {
       const content = event.target.nextElementSibling;
       if (content.style.display === "block") {
