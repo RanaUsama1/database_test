@@ -9,7 +9,8 @@
     "build-dev": "vite build --mode development",
     "build-prod": "vite build --mode production",
     "build-embed": "vite build --mode production --base=/dashboard/",
-    "preview": "vite preview --port 4173"
+    "preview": "vite preview --port 4173",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@innologica/vue-dropdown-menu": "^0.1.4",

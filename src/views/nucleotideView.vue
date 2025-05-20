@@ -217,8 +217,8 @@ export default {
     // 
     async searchDatabase() {
       this.loading = true;
-  this.errormsg = "";
-  this.metadata = [];
+      this.errormsg = "";
+      this.metadata = [];
 
   try {
     // Build params object - ONLY include defined values
