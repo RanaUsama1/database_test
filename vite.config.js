@@ -35,18 +35,18 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
-          target: 'http://localhost:8000', // Local backend
+        "/api": {
+          target: "http://localhost:8000", // Local backend
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
-      }
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+      },
     },
     base: isProduction ? "/database_test/" : "/",
     define: {
       __API_URL__: JSON.stringify(
-        isProduction 
-          ? "https://ncbibackend.vercel.app" 
+        isProduction
+          ? "https://ncbi-database-test.onrender.com"
           : "http://localhost:8000"
       ),
     },
