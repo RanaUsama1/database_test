@@ -1,0 +1,679 @@
+/* ..... global reset */
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cite,
+code,
+img,
+strong,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+header,
+nav,
+article,
+aside,
+footer,
+hgroup,
+section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+section,
+article,
+header,
+footer,
+nav,
+aside,
+hgroup {
+  display: block;
+}
+
+/* ...... web font embedding */
+
+@font-face {
+  font-family: "SansationRegular";
+  src: url("/public/css/Sansation_Regular.eot"),
+    url("/public/css/Sansation_Regular.woff") format("woff"),
+    url("/public/css/Sansation_Bold.woff") format("truetype");
+  /* url('/css/Sansation_Regular.svg#webfontLr2B6u5e') format('svg'); */
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SansationBold";
+  src: url("/public/css/Sansation_Bold.eot"),
+    url("/public/css/Sansation_Bold.woff") format("woff");
+  /* url('/css/Sansation_Bold.ttf') format('truetype'),  */
+  /* url('/css/Sansation_Bold.svg#webfont8dfDl0fr') format('svg'); */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* BODY 
+	PARTE PIÙ IMPORTANTE DEL PROGETTO
+*/
+
+body {
+  font-family: "SansationRegular", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  line-height: 150%;
+  text-align: left;
+  max-width: none;
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  /* background-image: url(/src/images/pexel.jpg); */
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; */
+}
+.main-content {
+  position: relative;
+  z-index: 0;
+}
+
+.main-content::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/images/Danio.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.8; /* Adjust opacity */
+  z-index: -1;
+}
+/* body::before {
+  content: "";
+  position: fixed; /* Ensures it covers the whole screen */
+  /* top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/images/Danio.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.8; /* Adjust this value for desired transparency */
+  /* z-index: -1; */ */
+/* } */ */
+
+footer {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8); /* Optional: Add a background color for contrast */
+  padding: 20px;
+}
+/* TIPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "SansationBold", Arial, Helvetica, sans-serif;
+  line-height: 120%;
+}
+
+ul {
+  display: block;
+  margin-bottom: 5px;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+ul ul {
+  list-style-type: circle;
+  margin-bottom: 5px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+ul ul ul {
+  list-style-type: square;
+  margin-bottom: 5px;
+}
+ul ul ul ul {
+  list-style-type: square;
+  margin-bottom: 5px;
+}
+
+select {
+  background-color: white;
+  border: thin solid blue;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+select .minimal {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+select .minimal:focus {
+  background-image: linear-gradient(45deg, green 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, green 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: green;
+  outline: 0;
+}
+
+time {
+  color: #0099ff;
+  font-size: 12px;
+}
+
+a .button-a {
+  color: #ffcc00;
+}
+a {
+  text-decoration: none;
+}
+a:link,
+a:visited {
+  color: #ffffff;
+}
+a:hover,
+a:focus,
+a:active {
+  color: #ffcc00;
+}
+
+dl {
+  display: inline;
+  float: left;
+}
+dt {
+  float: left;
+  display: inline;
+  margin-right: 10px;
+}
+dd {
+  float: left;
+  display: inline;
+  margin-right: 20px;
+}
+
+mark {
+  background: none;
+}
+
+/* ..... header */
+
+/* header {
+  width: 100%;
+  float: left;
+  display: inline;
+  margin-bottom: 20px;
+} */
+
+/* header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+} */
+
+header {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; Keep elements apart */
+  align-items: center; /* Align everything vertically */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centers the header */
+  padding: 20px;
+}
+/* Keep the logo and title together */
+header hgroup {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between logo and title */
+  margin: 0;
+}
+
+/* Style for the logo */
+header hgroup img {
+  width: 80px; /* Adjust size */
+  height: auto;
+}
+
+/* hgroup {
+  margin: 20px 0;
+}
+hgroup h1 {
+  font-size: 50px;
+  color: #003399;
+  line-height: 100%;
+}
+
+hgroup h2 {
+  font-size: 24px;
+  font-family: "SansationRegular", Arial, Helvetica, sans-serif;
+  color: #000000;
+} */
+
+header > nav {
+  float: left;
+  width: 960px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  display: inline; 
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6);
+  
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  
+  -webkit-box-shadow: 0 0 5px #0099ff;
+  -moz-box-shadow: 0 0 5px #0099ff;
+  box-shadow: 0 0 5px #0099ff;
+  /* display: flex; */
+  /* max-width: 1200px; */
+}
+
+header > nav h1 {
+  float: left;
+  font-size: 16px;
+  color: #cccccc;
+  margin: 0;
+}
+header > nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px; /* Adds spacing between items */
+}
+
+header > nav ul.right {
+  float: right;
+  /* justify-content: flex-end; */
+}
+header > nav ul.left {
+  float: left;
+  /* justify-content: flex-start; */
+}
+header > nav li {
+  display: inline;
+  margin-right: 20px;
+   margin: 0;
+ }
+header > nav li:last-child {
+  margin-right: 0;
+}
+
+header > nav li a {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: "SansationBold", Arial, Helvetica, sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+header > nav a:link,
+header nav a:visited {
+  color: #ffffff;
+  background: rgba(0, 0, 51, 0.4);
+}
+header > nav a:hover,
+header nav a:focus,
+header nav a:active,
+header nav a.selected {
+  color: #ffcc00;
+  background: #000033;
+}
+
+/* CONTENUTI */
+article header {
+  width: 100%;
+  float: left;
+  display: inline;
+  background: none;
+}
+
+section {
+  width: 350px;
+  float: left;
+  display: inline;
+  margin: 0 20px 20px 0;
+  padding: 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 5px #0099ff;
+  -moz-box-shadow: 0 0 5px #0099ff;
+  box-shadow: 0 0 5px #0099ff;
+}
+
+/*
+body > section:nth-of-type(1) { width: 420px;}
+body > section:nth-of-type(2) { width: 280px;}*/
+body > section:first-of-type {
+  width: 420px;
+}
+body > section:last-of-type {
+  width: 100%;
+}
+
+aside {
+  width: 220px;
+  float: left;
+  display: inline;
+  padding: 20px;
+
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 0 0 5px #0099ff;
+  -moz-box-shadow: 0 0 5px #0099ff;
+  box-shadow: 0 0 5px #0099ff;
+}
+
+aside ul {
+  list-style-position: inside;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+section section,
+aside section,
+article section {
+  width: auto;
+  float: left;
+  padding: 0;
+  margin: 20px 0 0 0;
+  background: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+article > section {
+  margin-top: 20px;
+}
+aside section {
+  margin: 20px 0 30px 0;
+}
+
+h1,
+aside section > h1 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+section > h1,
+aside > h1 {
+  font-size: 24px;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+/* article footer {
+  width: 100%;
+  height: auto;
+  float: left;
+  display: inline;
+  background: none;
+  margin: 0 0 10px;
+  padding: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+} */
+
+footer {
+  width: 100%;
+  clear: both;
+  margin: 40px 0 20px 0;
+  padding: 1px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 5px #0099ff;
+  -moz-box-shadow: 0 0 5px #0099ff;
+  box-shadow: 0 0 5px #0099ff;
+  position: relative;
+  bottom: 0;
+  /* z-index: -999; */
+}
+
+/* footer {
+  /* text-align: center; */
+  /* float: right; */
+/* } */ */
+/* Center the footer content */
+/* .footer-container {
+  width: 90%;
+  max-width: 1200px; /* Prevents content from being too wide */
+  /* margin: 0 auto; Centers everything */
+/* } */ */
+
+/* Center the banner images */
+.banners {
+  display: flex;
+  justify-content: space-around; /* Center images horizontally */
+  align-items: center;
+  /* gap: 20px; Space between images */
+  flex-wrap: wrap; /* Makes it responsive */
+  margin: 0 auto;
+}
+
+/* Image styling inside banners */
+.banners .image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* display: block; */
+}
+
+/* Style the text & links */
+footer p,
+footer a {
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  margin-top: 5px;
+  text-align: center;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* footer small {
+  float: right;
+} */
+
+/* form */
+legend {
+  font-size: 20px;
+  color: #00ffdd;
+  padding-bottom: 5px;
+}
+/*label { font-size:20px; float:left; clear:both; width:100%; }
+div {float: left} */
+input,
+textarea {
+  border: none;
+  margin: 0 0 10px 0;
+  padding: 5px 0;
+  float: left;
+  display: inline;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%; /* calc(100% - 30px) */
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
+  font-family: "SansationRegular", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  appearance: none;
+}
+
+textarea {
+  overflow: hidden;
+  height: 70px;
+}
+
+input:focus,
+textarea:focus {
+  background: #ffffff;
+}
+
+input[type="submit"],
+input[type="reset"] {
+  color: #ffffff;
+  margin: 0 10px 0 0;
+  background: rgba(0, 0, 51, 0.4);
+  padding: 5px 10px;
+  width: auto;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  color: #ffffff;
+  background: #000033;
+}
+
+/* Ensure bodyHome stays centered and doesn't stretch */
+.bodyHome {
+  width: 90%; /* Allows flexibility */
+  max-width: 1200px; /* Prevents it from becoming too wide */
+  margin: 0 auto; /* Centers it horizontally */
+  text-align: center; /* Centers the text */
+  padding: 20px;
+}
+
+/* Style for section titles */
+.sectionHome {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Ensures content inside bodyHome is centered */
+.contentHome {
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Image container to center images */
+.imagesHome {
+  display: flex;
+  justify-content: center; /* Centers images */
+  gap: 45px;
+  margin-top: 20px;
+}
+
+/* Style images inside .bodyHome */
+.imagesHome figure {
+  text-align: center;
+}
+
+.imagesHome img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
