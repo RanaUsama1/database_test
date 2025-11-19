@@ -45,15 +45,15 @@
         placeholder="Enter TaxID (e.g., 9606)"
       /><br />
       <!-- Add these to your form -->
-      <label for="organism">Organism:</label>
+      <!-- <label for="organism">Organism:</label>
       <input
         type="text"
         id="organism"
         v-model="organism"
         placeholder="Enter organism name (e.g., Homo sapiens)"
-      /><br />
+      /><br /> -->
 
-      <label for="gene">Gene:</label>
+      <!-- <label for="gene">Gene:</label>
       <input
         type="text"
         id="gene"
@@ -83,7 +83,7 @@
         id="pubDate"
         v-model="pubDate"
         placeholder="YYYY/MM/DD or YYYY"
-      /><br />
+      /><br /> -->
       <button type="button" @click="searchDatabase">Search</button>
     </form>
 
@@ -215,57 +215,93 @@ export default {
     //     this.metadata = data.metadata || [];
     //   }
     // 
-    async searchDatabase() {
-      this.loading = true;
-      this.errormsg = "";
-      this.metadata = [];
+//     async searchDatabase() {
+//       this.loading = true;
+//       this.errormsg = "";
+//       this.metadata = [];
 
+//   try {
+//     // Build params object - ONLY include defined values
+//     const params = {
+//       database: this.selectedDatabase
+//     };
+
+//     // Conditionally add parameters that have values
+//     if (this.selectedDatabase === 'assembly') {
+//       if (this.accessionIds) {
+//         // For assembly searches, only send accession_ids
+//         params.accession_ids = this.accessionIds.trim().split(/[\s,]+/).filter(id => id);
+//       }
+//     } else {
+//       // For nucleotide searches
+//       if (this.query) params.query = this.query;
+//       if (this.organism) params.organism = this.organism;
+//       if (this.gene) params.gene = this.gene;
+//       if (this.protein) params.protein = this.protein;
+//       if (this.taxid) params.taxid = Number(this.taxid); // Ensure numeric
+//       if (this.minLength) params.min_length = Number(this.minLength);
+//       if (this.maxLength) params.max_length = Number(this.maxLength);
+//       if (this.moleculeType) params.molecule_type = this.moleculeType;
+//       if (this.pubDate) params.publication_date = this.pubDate;
+//     }
+
+//     // 🚀 Use the API service
+//     const response = await API.search(params);
+    
+//     // Handle response - check all possible response formats
+//     this.metadata = response.metadata || response.results || response.assemblies || [];
+    
+//     // Handle failed accessions if present
+//     if (response.failed_accessions?.length > 0) {
+//       this.errormsg = `Partial success. Failed: ${response.failed_accessions.join(', ')}`;
+//     }
+
+//   } catch (error) {
+//     console.error("Search error:", error);
+//     // Improved error message display
+//     this.errormsg = error.message.includes('{') 
+//       ? "Invalid parameters sent to server" 
+//       : error.message;
+//   } finally {
+//     this.loading = false;
+//   }
+// }
+async searchDatabase() {
+  this.loading = true;
+  this.errormsg = "";
+  
   try {
-    // Build params object - ONLY include defined values
     const params = {
-      database: this.selectedDatabase
+      database: this.selectedDatabase,
+      query: this.query,
+      organism: this.organism,
+      taxid: Number(this.taxid) || undefined, // Force numeric/undefined
+      gene: this.gene,
+      protein: this.protein,
+      molecule_type: this.moleculeType,
+      publication_date: this.pubDate,
+      min_length: Number(this.minLength) || undefined,
+      max_length: Number(this.maxLength) || undefined
     };
 
-    // Conditionally add parameters that have values
-    if (this.selectedDatabase === 'assembly') {
-      if (this.accessionIds) {
-        // For assembly searches, only send accession_ids
-        params.accession_ids = this.accessionIds.trim().split(/[\s,]+/).filter(id => id);
-      }
-    } else {
-      // For nucleotide searches
-      if (this.query) params.query = this.query;
-      if (this.organism) params.organism = this.organism;
-      if (this.gene) params.gene = this.gene;
-      if (this.protein) params.protein = this.protein;
-      if (this.taxid) params.taxid = Number(this.taxid); // Ensure numeric
-      if (this.minLength) params.min_length = Number(this.minLength);
-      if (this.maxLength) params.max_length = Number(this.maxLength);
-      if (this.moleculeType) params.molecule_type = this.moleculeType;
-      if (this.pubDate) params.publication_date = this.pubDate;
+    // Handle assembly-specific params
+    if (this.selectedDatabase === 'assembly' && this.accessionIds) {
+      params.accession_ids = this.accessionIds.split(/[\s,]+/).filter(id => id);
     }
 
-    // 🚀 Use the API service
     const response = await API.search(params);
+    this.metadata = response.metadata || [];
     
-    // Handle response - check all possible response formats
-    this.metadata = response.metadata || response.results || response.assemblies || [];
-    
-    // Handle failed accessions if present
-    if (response.failed_accessions?.length > 0) {
+    if (response.failed_accessions?.length) {
       this.errormsg = `Partial success. Failed: ${response.failed_accessions.join(', ')}`;
     }
-
   } catch (error) {
-    console.error("Search error:", error);
-    // Improved error message display
-    this.errormsg = error.message.includes('{') 
-      ? "Invalid parameters sent to server" 
-      : error.message;
+    this.errormsg = error.response?.data?.detail || error.message;
   } finally {
     this.loading = false;
   }
 },
+
     toggleCollapsible(event) {
       const content = event.target.nextElementSibling;
       if (content.style.display === "block") {

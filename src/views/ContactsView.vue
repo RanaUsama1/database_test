@@ -1,6 +1,6 @@
 
 <!-- frontend/src/components/MetadataSearch.vue -->
-<template>
+<!-- <template>
   <div class="metadata-search-container">
     <h1>NCBI Assembly Metadata Lookup</h1>
     
@@ -27,21 +27,21 @@
           View Saved CSV
         </button>
       </div>
-    </div>
+    </div>  -->
 
     <!-- Loading Indicator -->
-    <div v-if="isLoading" class="loading-spinner">
+    <!-- <div v-if="isLoading" class="loading-spinner">
       <div class="spinner"></div>
       <p>Fetching metadata...</p>
-    </div>
+    </div> -->
 
     <!-- Error Message -->
-    <div v-if="errorMessage" class="error-message">
+    <!-- <div v-if="errorMessage" class="error-message">
       {{ errorMessage }}
-    </div>
+    </div> -->
 
     <!-- Metadata Display -->
-    <div v-if="metadata" class="metadata-results">
+    <!-- <div v-if="metadata" class="metadata-results">
       <div 
         v-for="(data, accession) in metadata" 
         :key="accession" 
@@ -65,10 +65,10 @@
           <p>Error: {{ data.error }}</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- CSV Display -->
-    <div v-if="csvData" class="csv-display">
+    <!-- <div v-if="csvData" class="csv-display">
       <h2>Saved CSV Data</h2>
       <table>
         <thead>
@@ -88,8 +88,8 @@
       </table>
     </div>
   </div>
-</template>
-<script>
+</template> -->
+<!-- <script>
 import axios from 'axios'
 
 export default {
@@ -164,4 +164,4 @@ export default {
   margin: 0 auto;
 }
 
-</style>
+</style> -->

@@ -1,5 +1,4 @@
 <script>
-
 export default {
   data: function () {
     return {
@@ -16,8 +15,7 @@ export default {
   },
 
   methods: {
-    async info() {
-    },
+    async info() {},
     methodToRunOnSelect(payload) {
       this.object = payload;
     },
@@ -47,9 +45,9 @@ export default {
           <li>
             <RouterLink to="/genome"> Genome </RouterLink>
           </li>
-          <li>
+          <!-- <li>
             <RouterLink to="/nucleotide"> Nucleotide </RouterLink>
-          </li>
+          </li> -->
           <!-- <li>
           <RouterLink to="/sra"> SRA </RouterLink>
         </li> -->

@@ -4,7 +4,7 @@ import JsonCSV from "vue-json-csv";
 import App from "./App.vue";
 import router from "./router";
 import axios from "./services/axios.js";
-import API from "./services/axios.js"
+import API from "./services/axios.js";
 import ErrorMsg from "./components/ErrorMsg.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
 import NucleoComp from "./components/NucleotideComp.vue";
@@ -32,6 +32,8 @@ app.component("LoadingSpinner", LoadingSpinner);
 app.component("BioProjComp", BioProjComp);
 app.component("TableComp", TableComp);
 app.use(router);
-app.provide('API', API)
+app.provide("API", API);
 app.mount("#app");
 app.use(BootstrapVue3);
+// console.log("VITE_API_BASE:", import.meta.env.VITE_API_BASE);
+// console.log("Mode:", import.meta.env.MODE); // should be "production"
